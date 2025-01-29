@@ -41,4 +41,5 @@ python test.py --data_name PaviaC --epoches 20 --warmup_epoches 10 --eta_min 1e-
 This work builds upon [FeatUp](https://github.com/mhamilton723/FeatUp) and [SegEarth-OV](https://github.com/likyoo/SegEarth-OV), and we extend our sincere gratitude to the researchers and developers.
 
 
-
+## 📧 Email
+pp2373886592@gmail.com
