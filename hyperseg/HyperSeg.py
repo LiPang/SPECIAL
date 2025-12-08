@@ -93,16 +93,16 @@ def sampling_clean_samples(pre_model_main, BvSB_model_main,
         positions = np.stack(np.where((pre_model_main == t) & (tar_image > 0))).T
 
         bvsb = BvSB_model_main[positions[:, 0], positions[:, 1]]
-        # if len(bvsb) < 5:
-        #     continue
+        if len(bvsb) < 5:
+            continue
 
         separate_labels, gmm_mean, gmm_std = gmm_cluster_1d(bvsb, n_components=3, plot_flag=False)
         ind_high_confidence = np.where(separate_labels == gmm_mean.argmax())[0]
         ind_low_confidence = np.where(separate_labels == gmm_mean.argmin())[0]
 
         ind_high_confidence = np.random.choice(ind_high_confidence, size=len(ind_high_confidence)//5, replace=False)
-        # if len(ind_high_confidence) < 5:
-        #     continue
+        if len(ind_high_confidence) < 5:
+            continue
         positions_positive_dict[t] = positions[ind_high_confidence]
         positions_negative_dict[t] = positions[ind_low_confidence]
 
@@ -174,6 +174,8 @@ def hyperseg_classification(image, image_hsi, label_list, tar_image, patch_posit
 
     OA_main_epoches, AA_main_epoches, Kappa_main_epoches = [], [], []
     Recall_main_epoches, Precision_main_epoches = [], []
+    best_aa = -1.0
+    best_model_state = None
     pbar = tqdm(range(args.epoches))
     for epoch in pbar:
         model_main.train()
@@ -277,6 +279,11 @@ def hyperseg_classification(image, image_hsi, label_list, tar_image, patch_posit
         Recall_main_epoches.append(np.diagonal(cmat) / cmat.sum(1))
         Precision_main_epoches.append(np.diagonal(cmat) / (cmat.sum(0) + 1e-8))
 
+        # Track best model by AA
+        if AA_mean_test > best_aa:
+            best_aa = AA_mean_test
+            best_model_state = deepcopy(model_main.state_dict())
+
 
     best_epoch = np.argmax(AA_main_epoches)
     print(f'Best epoch: OA: {OA_main_epoches[best_epoch]}, '
@@ -285,6 +292,7 @@ def hyperseg_classification(image, image_hsi, label_list, tar_image, patch_posit
     results = pd.DataFrame([OA_main_epoches[best_epoch],
                         AA_main_epoches[best_epoch],
                         Kappa_main_epoches[best_epoch]])
+
     return results
 
 

@@ -1,8 +1,9 @@
 import os
-os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 import argparse
 import random
 import warnings
+
+import h5py
 import torch
 import numpy as np
 from scipy.io import *
@@ -95,6 +96,7 @@ def load_aerorit():
     return data_name, img_ori, label_gt, label_list, positions, img_rgb
 
 
+
 def build_settings():
     parser = argparse.ArgumentParser("")
     parser.add_argument('--learning_rate', type=float, default=1e-3, help='learning rate')
@@ -105,9 +107,8 @@ def build_settings():
     parser.add_argument('--epoches', type=int, default=20, help='epoch number')
     parser.add_argument('--samples', type=int, default=500)
     parser.add_argument('--data_name', type=str, default='AeroRIT')
-    parser.add_argument('--lambda1', type=float, default=0.1)
+    parser.add_argument('--lambda1', type=float, default=0.2)
     parser.add_argument('--lambda2', type=float, default=1)
-
     args = parser.parse_args()
     return args
 
@@ -122,7 +123,6 @@ if __name__ == '__main__':
     elif args.data_name == 'AeroRIT':
         data_name, image_hsi, label_gt, label_list, positions, image = load_aerorit()
         args.data_name = data_name
-        
 
     image_hsi = rsshow(image_hsi, 0.0001)
     image = rsshow(image, 0.001)
