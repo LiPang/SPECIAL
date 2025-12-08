@@ -29,10 +29,10 @@ Download the CLIP from [Baidu Netdisk](https://pan.baidu.com/s/1iMP45g8yAJ4dIUiD
 ### 4. Run Classification
 ```
 # AeroRIT
-python test.py --data_name AeroRIT --epoches 10 --warmup_epoches 5 --eta_min 1e-5
+python test.py --data_name AeroRIT --epoches 10 --warmup_epoches 5 --eta_min 1e-5 --learning_rate 0.001
 
 # Pavia Centre
-python test.py --data_name PaviaC --epoches 20 --warmup_epoches 10 --eta_min 1e-4
+python test.py --data_name PaviaC --epoches 20 --warmup_epoches 10 --eta_min 1e-4 --learning_rate 0.0004
 ```
 
 
@@ -43,3 +43,4 @@ This work builds upon [FeatUp](https://github.com/mhamilton723/FeatUp) and [SegE
 
 ## 📧 Email
 pp2373886592@gmail.com
+
