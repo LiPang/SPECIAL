@@ -24,7 +24,7 @@ pip install requirements.txt
 Download the data from [Baidu Netdisk](https://pan.baidu.com/s/1tJjddYeVAVyY0wpHrAckHw?pwd=y15t)(code: y15t) and place it in the data folder. (The Reflectance of AeroRIT needs to be downloaded from [GoogleDrive](https://drive.google.com/drive/folders/1PPXXqZQSXm3QTSAuy8MjL1O_ck5p8TvM?usp=drive_link))
 
 ### 3. Download CLIP
-Download the CLIP from [Baidu Netdisk](https://pan.baidu.com/s/1iMP45g8yAJ4dIUiDwRVymQ?pwd=vii1)(code: vii1) and place it in the checkpoint folder.
+Download the CLIP from [Baidu Netdisk](https://pan.baidu.com/s/1Yev_v-SWmrVVdtkekSE0pQ?pwd=cjb5)(code: cjb5) and place it in the checkpoint folder.
 
 ### 4. Run Classification
 ```
